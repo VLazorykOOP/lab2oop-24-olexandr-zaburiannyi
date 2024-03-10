@@ -58,17 +58,47 @@ string encryptText(const string& text) {
     return encryptedText;
 }
 
+
+string decryptText(const string& encryptedText) {
+    string decryptedText;
+    for (int i = 0; i < encryptedText.length(); i += 2) {
+
+        int firstByte = (int)encryptedText[i];
+        int secondByte = (int)encryptedText[i + 1];
+
+        int parityBit = (firstByte >> 7) & 1;
+        int asciiValue = firstByte & 0x7F;
+
+        char c = (char)asciiValue;
+
+        int position = (secondByte & 0x7F) + ' ';
+
+        int parityCheck = 0;
+        for (int j = 0; j < 7; ++j) {
+            if ((asciiValue >> j) & 1) {
+                parityCheck ^= 1;
+            }
+        }
+
+        if (parityCheck != parityBit) {
+
+            cerr << "Помилка декодування: неправильний біт парності для символу '" << c << "'" << endl;
+        }
+
+        decryptedText += c;
+    }
+    return decryptedText;
+}
+
 void secondTask() {
     string paddedText = padText();
     string encryptedText = encryptText(paddedText);
-    for (char c : encryptedText) {
-        cout << (int)c << " ";
-    }
-    cout << endl;
+   string decryptedText = decryptText(encryptedText);
+    cout<< decryptedText << endl;
 }
 
 int main() {
-   firstTask();
+//   firstTask();
    secondTask();
     return 0;
 }
