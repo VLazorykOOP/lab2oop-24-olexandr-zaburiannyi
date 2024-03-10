@@ -71,7 +71,6 @@ string decryptText(const string& encryptedText) {
 
         char c = (char)asciiValue;
 
-        int position = (secondByte & 0x7F) + ' ';
 
         int parityCheck = 0;
         for (int j = 0; j < 7; ++j) {
