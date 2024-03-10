@@ -82,7 +82,7 @@ string decryptText(const string& encryptedText) {
 
         if (parityCheck != parityBit) {
 
-            cerr << "Помилка декодування: неправильний біт парності для символу '" << c << "'" << endl;
+            cerr << "Wrong parity bit '" << c << "'" << endl;
         }
 
         decryptedText += c;
@@ -98,7 +98,7 @@ void secondTask() {
 }
 
 int main() {
-//   firstTask();
+   firstTask();
    secondTask();
     return 0;
 }
